@@ -1,0 +1,63 @@
+#: import registration_tab Registration_window.registration
+
+<RegistrationScreen>:
+    win_screen: app.root_registration_manager
+    username: _username
+    password: _password
+    confirm_password: _confirm_password
+    error_lbl: _error_lbl
+    name: 'registration_tab'
+
+    BoxLayout:
+        pos: (self.parent.width-self.width)/2,40
+        orientation: 'vertical'
+        size_hint: None, None
+        size: 500, 400
+        TitleLabel:
+            font_size: 40
+            text: 'Create your account'
+        TitleLabel:
+            font_size: 16
+            text: 'Your account is your portal to all things Daily Map: your reports, statistics, achievements, habits, and more!'
+
+        TextCustom:
+            text: 'Username'
+        TextInputCustom:
+            text: 'Admin'
+            id: _username
+        Row:
+            height: 30
+            TextCustom:
+                text: 'Password'
+                width: 240
+            TextCustom:
+                text: 'Confirm password'
+                width: 240
+        Row:
+            TextInputCustom:
+                password: True
+                id: _password
+                width: 240
+
+            TextInputCustom:
+                password: True
+                id: _confirm_password
+                width: 240
+        TitleLabel:
+            id: _error_lbl
+            font_size: 16
+            text: ''
+        ButtonRegistration:
+            id: _btn_reg
+            text: 'SIGN UP'
+            width: 500
+            on_press: root.register_user()
+
+
+
+
+<Row@GridLayout>:
+    cols: 2
+    spacing: 20
+    size_hint_y: None
+    height: 50

@@ -1,0 +1,278 @@
+#: import settings Settings.settings_kv
+
+<RelativeLayoutCustom@RelativeLayout>:
+    #Add border to RelativeLayout
+    canvas.before:
+        Color:
+            rgb: .87, .89, .91
+        Rectangle:
+            size: self.width, self.height
+            pos: 0,0
+    canvas:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.width-2.5, self.height-2.5
+            pos: 1.25,1.25
+
+<TextTop@Label>:
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    pos: 0, (self.parent.height-self.height)/2
+    font_size: 14
+    color: .19, .24, .29, 1
+    halign: 'center'
+    valign: 'middle'
+    size_hint_y: None
+
+<TextCustom@Label>:
+    #common text
+    color: .19, .24, .29, 1
+    font_size: 16
+    font_name: 'Settings/fonts/OpenSans-Light.ttf'
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+    size_hint_y: None
+    height: 30
+
+<TitleLabel@Label>:
+    #title text
+    text_size: self.size
+    color: .19, .24, .29, 1
+    font_name: 'Settings/fonts/OpenSans-Light.ttf'
+    halign: 'left'
+    valign: 'middle'
+    size_hint_y: None
+    height: 60
+
+
+
+<ButtonSave@Button>:
+    size_hint: None, None
+    size: 160, 50
+    font_name: 'Settings/fonts/OpenSans-Bold.ttf'
+    background_normal: 'Settings/images/123.png'
+    background_down: 'Settings/images/green_button.png'
+    background_color: .01, .70, .89,1
+    color: 1,1,1,1
+
+<ButtonCancel@Button>:
+    size_hint: None, None
+    size: 180, 50
+    font_name: 'Settings/fonts/OpenSans-Bold.ttf'
+    background_normal: 'Settings/images/green_button.png'
+    background_down: 'Settings/images/red.png'
+    #background_color: .01, .70, .89,1
+    color: 1,1,1,1
+
+<ButtonDelete@Button>:
+    size_hint: None, None
+    size: 180, 50
+    font_name: 'Settings/fonts/OpenSans-Bold.ttf'
+    background_normal: 'Settings/images/red.png'
+    background_down: 'Settings/images/123.png'
+    background_color: 1, .70, .89,1
+    color: 1,1,1,1
+
+<Datebtn@Button>:
+    id: _date_btn
+    pos: 0,0
+    size: self.parent.size
+    background_normal: 'Settings/images/free.png'
+    background_down: 'Settings/images/free.png'
+    RelativeLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        canvas:
+            Color:
+                rgb: (.01,.80,.73) if self.parent.state == 'down' else (0,0,0)
+            Rectangle:
+                pos: self.parent.width-40, 15 #(self.parent.height-self.height)/2
+                size: 20,10
+                source: 'Settings/images/bottom_arrow.png'
+
+
+<ChoseDate@RelativeLayout>:     #DATE DATE DATE DATE DATE DATE
+    size_hint: None, None
+    width: 280#565#322.5
+    height: 40
+    canvas:
+        Color:
+            rgb: .98,.99,.99
+        Rectangle:
+            size: self.size
+            pos: 0,0
+    TextTop:
+        x: 5
+        id: _date_text
+        text: 'FRIDAY, 10 JUNE 2018'
+    Datebtn:
+        id: _date_btn
+
+<Rightbtn@Button>:
+    size_hint:None,None
+    size: 50,50
+    background_normal: 'Settings/images/free.png'
+    background_down: 'Settings/images/free.png'
+    RelativeLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        canvas:
+            Color:
+                rgb: (.01,.80,.73) if self.parent.state == 'down' else (1,1,1)
+            Rectangle:
+                pos: 0,10
+                size: 10,30
+                source: 'Settings/images/right_arrow.png'
+<Leftbtn@Button>:
+    size_hint:None,None
+    size: 50,50
+    background_normal: 'Settings/images/free.png'
+    background_down: 'Settings/images/free.png'
+    RelativeLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        canvas:
+            Color:
+                rgb: (.01,.80,.73) if self.parent.state == 'down' else (1,1,1)
+            Rectangle:
+                pos: 40,10
+                size: 10,30
+                source: 'Settings/images/left_arrow.png'
+
+
+<Backbtn@Button>:
+    size_hint:None,None
+    background_normal: 'Settings/images/free.png'
+    background_down: 'Settings/images/free.png'
+    RelativeLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        canvas:
+            Color:
+                rgb: (.01,.80,.73) if self.parent.state == 'down' else (1,1,1)
+            Rectangle:
+                pos: 10, (self.parent.height-30)/2
+                size: 10,30
+                source: 'Settings/images/left_arrow.png'
+
+
+<TextInputCustom@TextInput>:
+    #font_size: 16
+    multiline: False
+    size_hint: None, None
+    width: 500
+    height: 50
+    padding: 15
+    background_normal: ''
+    background_active: 'Settings/images/123.png'
+    color: 1,1,1,1
+    font_size: '16dp'
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    background_color: 1,1,1,1
+    canvas.after:
+        Color:
+            rgb: .87, .89, .91
+        Line:
+            points: self.pos[0], self.pos[1], self.pos[0], self.pos[1] + self.size[1], self.pos[0] + self.size[0], self.pos[1] + self.size[1], self.pos[0]+self.size[0], self.pos[1]
+            close: True
+            width: 1
+
+
+
+
+
+
+#***************************************TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER
+# TIME COUNTER BLOCK
+# JUST add TimeCounter:
+#
+#
+#
+#
+#
+<TimeLabel@Label>:
+    text_size: self.size
+    color: .19, .24, .29, 1
+    font_name: 'Settings/fonts/OpenSans-Light.ttf'
+    size_hint: None, None
+    size: 70, 40
+    font_size: 50
+    halign: 'center'
+    valign: 'middle'
+
+<Arrow_top_btn@Button>:
+    size_hint: None, None
+    size: 85, 40
+    background_normal: 'Settings/images/free.png'
+    background_down: 'Settings/images/free.png'
+    #background_color: (.19, .24, .29, 1) if self.state == 'down' else (.87, .89, .91, 1)
+    StackLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        orientation: 'lr-tb'
+        RelativeLayout:
+            canvas:
+                Color:
+                    rgba: (.01,.8,.73,1) if self.parent.parent.state == 'down' else (.19, .24, .29, 1)
+                Rectangle:
+                    pos: 27.5, 30
+                    size: 30,10
+                    source:'Settings/images/top_arrow.png'
+
+<Arrow_bottom_btn@Button>:
+    size_hint: None, None
+    size: 85, 40
+    background_normal: 'Settings/images/free.png'
+    background_down: 'Settings/images/free.png'
+    #background_color: (.19, .24, .29, 1) if self.state == 'down' else (.87, .89, .91, 1)
+    StackLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        orientation: 'lr-tb'
+        RelativeLayout:
+            canvas:
+                Color:
+                    rgba: (.01,.8,.73,1) if self.parent.parent.state == 'down' else (.19, .24, .29, 1)
+                Rectangle:
+                    pos: 27.5, 5
+                    size: 30,10
+                    source: 'Settings/images/bottom_arrow.png'
+
+
+<TimeCounter>:
+    size_hint: None,None
+    size: 170, 80
+    BoxLayout:
+        pos: 0, self.parent.height-20-25
+        Arrow_top_btn:
+            id: _up_hour
+        Arrow_top_btn:
+            id: _up_minute
+    RelativeLayout:
+        size_hint: None,None
+        size: 170, 40
+        pos: 0, 20
+        TimeLabel:
+            id: _hour
+            pos: 0,3
+            halign: 'right'
+            text: '09'
+        TimeLabel:
+            pos: 70, 8
+            width: 30
+            text: ':'
+        TimeLabel:
+            id: _minute
+            pos:100,3
+            halign: 'left'
+            text: '00'
+    BoxLayout:
+        pos: 0,0
+        Arrow_bottom_btn:
+            id: _down_hour
+        Arrow_bottom_btn:
+            id: _down_minute
+
+#***************************************TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER TIME COUNTER

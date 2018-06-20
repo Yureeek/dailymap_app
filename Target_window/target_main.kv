@@ -1,0 +1,102 @@
+#: import target_main Target_window.target_main
+#: import target Target_window.target
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+<TargetWindow>:
+    name: 'target_window'
+    size_hint: None, None
+    size: 1200, 700
+    canvas:
+        Color:
+            rgb: .96,.96,.98
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    BoxLayout:
+        spacing: 0
+        BoxLayout:
+            spacing: 3
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 50
+            canvas:
+                Color:
+                    rgb: .87, .89, .91
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+
+            MenuImageButton:
+                on_press:
+                    root.ids._tabs.current = 'goals_plan_tab'
+
+                state: 'down'
+                SLtarget:
+                    RLtarget:
+                        canvas:
+                            Rectangle:
+                                pos: 2.5,2.5
+                                size: 45,45
+                                source: 'Settings/images/navigation/goals_plan.png'
+            MenuImageButton:
+                on_press: root.ids._tabs.current = 'goals_creation_tab'
+
+                SLtarget:
+                    RLtarget:
+                        canvas:
+                            Rectangle:
+                                pos: 2.5,2.5
+                                size: 45,45
+                                source: 'Settings/images/navigation/goals_creation.png'
+            MenuImageButton:
+                on_press: root.ids._tabs.current = 'sleep_mode_tab'
+
+                SLtarget:
+                    RLtarget:
+                        canvas:
+                            Rectangle:
+                                pos: 2.5,2.5
+                                size: 45,45
+                                source: 'Settings/images/navigation/sleep.png'
+            MenuImageButton:
+                on_press: root.ids._tabs.current = 'goals_creation_tab'
+
+                SLtarget:
+                    RLtarget:
+                        canvas:
+                            Rectangle:
+                                pos: 2.5,2.5
+                                size: 45,45
+                                source: 'Settings/images/navigation/blocks.png'
+            Widget:
+
+        ScreenManager:
+            id: _tabs
+            transition: NoTransition()
+            GoalsPlan:
+                id: _goals_plan
+            GoalsCreation:
+                id: _goals_creation
+            SleepMode:
+                id: _sleep_mode
+
+
+<MenuImageButton@ToggleButton>:
+    group: '_leftmbtn'
+    size_hint: None, None
+    size: 50,50
+    background_normal: ''
+    background_down: ''
+    background_color: (.19, .24, .29, 1) if self.state == 'down' else (.87, .89, .91, 1)
+
+<SLtarget@StackLayout>:
+    pos: self.parent.pos
+    size: self.parent.size
+    orientation: 'lr-tb'
+
+<RLtarget@RelativeLayout>:
+    size_hint_x: None
+    width: 30
+    pos: self.parent.pos
+    canvas:
+        Color:
+            rgba: (1,1,1, 1) if self.parent.parent.state == 'down' else (.19, .24, .29, 1)

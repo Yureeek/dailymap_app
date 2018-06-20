@@ -1,0 +1,92 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+
+<RegistrationWindow@Screen>:
+    name: 'registration_window'
+    RelativeLayout:# выравниваем относительно него по центру
+        canvas:
+            Color:
+                rgb: .96,.96,.94,1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        RelativeLayout:  #Top bar
+            size_hint_y: None
+            height: 80
+            pos: 0, self.parent.height-self.height
+            canvas.before:
+                Color:
+                    rgb: .87, .89, .91
+                Line:
+                    points: 0,0, self.width,0
+                    width: 1.25
+            canvas:
+                Color:
+                    rgb: 1,1,1
+                Rectangle:
+                    size: self.size
+                    pos: 0,0
+            TopLbl:
+                text: 'Dailymap'
+
+        RelativeLayoutCustom:
+            center_x: self.parent.center_x
+            y: self.parent.height-self.height-180
+            size_hint: None, None
+            size: 600, 500
+
+            BoxLayout:
+                y: self.parent.height - self.height
+                size_hint: 1,None
+                height: 60
+                orientation: 'horizontal'
+                MenuRegButton:
+                    state: 'down'
+                    id: one
+                    text: 'SIGN IN'
+                    size_hint_x: .5
+                    on_press:  _tabs.current = 'entry_tab'
+                MenuRegButton:
+                    id: two
+                    size_hint_x: .5
+                    text: 'SIGN UP'
+                    on_press: _tabs.current = 'registration_tab'
+            ScreenManager:
+                id: _tabs
+                transition: NoTransition()
+                EntryScreen
+                RegistrationScreen
+
+
+
+
+
+<MenuRegButton@ToggleButton>:
+    group: '_menuregbutton'
+    color: .19, .24, .29, 1 if self.state == 'down' else .52, .59, .71, 1
+    font_size: 16
+    font_name: 'Settings/fonts/OpenSans-Bold.ttf'
+    bold: True
+    background_normal: 'Settings/images/123.png'
+    background_down: ''
+    canvas.before:
+        PushMatrix:
+        Color:
+            rgb: .87, .89, .91
+        Line:
+            points: self.x,self.y, self.x, self.y+self.height, self.x+self.width, self.y+self.height, self.x+self.width, self.y
+            close: False if self.state == 'down' else True
+            width: 1.25
+        PopMatrix:
+
+<TopLbl@Label>:
+    color: .01, .70, .89,1
+    font_size: 40
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    size_hint_y: None
+    height: 80
+
+

@@ -1,0 +1,28 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+
+<Application>:
+    orientation: 'vertical'
+    registration_manager: registration_manager
+    application_manager: application_screen.ids._application_manager
+    ScreenManager:                      #application root screen manager
+        id: registration_manager
+        transition: NoTransition()
+        RegistrationWindow:
+            #id: registration_screen                     #registration screen
+        ApplicationScreen:
+            id: application_screen
+            name: 'application_window'
+
+<ApplicationScreen@Screen>:
+    ScreenManager:
+        id: _application_manager
+        transition: NoTransition()
+        ScheduleWindow:
+            id: _schedule_window
+        TargetWindow:
+            id: _target_window
+
+        SettingsWindow:
+            id: _settings_window
+    NavigationBar:
+        id: _navigation_bar

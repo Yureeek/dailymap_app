@@ -1,0 +1,146 @@
+#: import sleep_mode Target_window.sleep_mode
+<SleepMode>:
+    name: 'sleep_mode_tab'
+    bedtime: _bedtime
+    wakeup: _wakeup
+    graph: _graph
+    RelativeLayoutCustom:
+
+        pos: 25,25#self.parent.height-self.height-25
+        size_hint: None, None
+        size: 1100, 650
+        TitleLabel:
+            pos: 50, self.parent.height-self.height
+            font_size: 32
+            text: 'Make your own Ideal Sleep Schedule. Choose your sleep and wake times.'
+            height: 50
+        BoxLayout:
+            size_hint: None, None
+            size: 900, 550
+            pos: 100, 25
+
+            BoxLayout:                         #LEFT PART
+                orientation: 'vertical'
+                size_hint_x: .5
+                BoxLayout:                      #LEFT TOP PART
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: 400
+                    SleepGraph:
+                        id:_graph
+                        TitleLabel:
+                            pos: (self.parent.width-self.width)/2, (self.parent.height-self.height)/2
+                            id: _whole_sleep_time
+                            font_size: 64
+                            font_name: 'Settings/fonts/OpenSans-Bold.ttf'
+                            size_hint:None,None
+                            size: 180,180
+                            text: '23'
+                #_________________________________________________________________________Wake up
+                BoxLayout:
+                    size_hint_y: None
+                    height: 150
+                    BoxLayout:
+                        orientation: 'vertical'
+                        TitleLabel:
+                            font_size: 32
+                            text: 'Bedtime'
+                            height: 50
+                            size_hint_x: None
+                            width: 175
+                            halign: 'center'
+
+                        TimeCounterGraph:
+                            id: _bedtime
+                    BoxLayout:
+                        orientation: 'vertical'
+                        TitleLabel:
+                            font_size: 32
+                            text: 'Wake up'
+                            height: 50
+                            size_hint_x: None
+                            width: 175
+                            halign: 'center'
+                        TimeCounterGraph:
+                            id: _wakeup
+                Widget:
+                    #___________________________________________________________________________________________
+            RelativeLayout:
+                size_hint_x: .5
+
+
+                canvas:
+                    Color:
+                        rgb: 0,0,0
+                    Rectangle:
+                        size: 425, 150
+                        pos: 25, 150
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: None, None
+                    size: 400, 200
+                    pos: 25, self.parent.height-self.height
+                    TitleLabel:
+                        font_size: 32
+                        text: 'Recommended:'
+                        height: 50
+                    GridLayout:
+                        cols:2
+                        TitleLabel:
+                            font_size: 24
+                            text: 'Sleep time:'
+                            height: 40
+                            size_hint_x: None
+                            width: 140
+                        TitleLabel:
+                            font_size: 24
+                            text: '8 hours'
+                            height: 40
+
+                        TitleLabel:
+                            font_size: 24
+                            text: 'Bedtime:'
+                            height: 40
+                        TitleLabel:
+                            font_size: 24
+                            text: '23:00'
+                            height: 40
+
+                        TitleLabel:
+                            font_size: 24
+                            text: 'Wake up time:'
+                            height: 40
+                        TitleLabel:
+                            font_size: 24
+                            text: '07:00'
+                            height: 40
+                    Widget:
+
+
+
+
+                BoxLayout:
+                    size_hint: 1, None
+                    height: 100
+                    spacing: 5
+                    Widget:
+                    ButtonCancel:
+                        height: 100
+                        text: 'CANCEL'
+                        on_press: root.update_time()
+                    ButtonSave:
+                        height: 100
+                        text: 'SAVE'
+                        on_press: root.save_time()
+
+
+
+
+<SleepGraph@RelativeLayout>:
+    size_hint: None,None
+    size: 400,400
+    canvas.before:
+        Ellipse:
+            pos: 0,0
+            size: self.size
+            source: 'Settings/images/sleep_mode/sleep_bottom.png'

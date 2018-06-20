@@ -1,0 +1,364 @@
+#: import schedule Schedule_window.schedule
+#:import Factory kivy.factory.Factory
+#:import Window kivy.core.window
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+
+<ScheduleWindow@Screen>:
+
+    name: 'schedule_window'
+    size_hint: None, None
+    size: 1200, 700
+    canvas:
+        Color:
+            rgb: 1,1,1 #.96,.96,.98
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    BoxLayout:
+
+#LEFT PART LEFT LEFT LEFT LEFT LEFT LEFT#LEFT PART LEFT LEFT LEFT LEFT LEFT LEFT#LEFT PART LEFT LEFT LEFT LEFT LEFT LEFT
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 300
+            canvas:
+                Color:
+                    rgb: .95,.96,.98
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                size: 300, 90
+                ButtonSave:
+                    background_normal: 'Settings/images/dark_blue.png'
+                    width: self.parent.width
+                    text: 'SHOW ALL'
+                ChoseDate:
+                    width: self.parent.width
+            ScrollView:
+                size_hint: None,None
+                size: 300, 510
+                scroll_timeout: 250
+                scroll_distance: 0#20
+                scroll_y: 0
+                do_scroll_y: True
+                do_scroll_x: False
+                GridLayout: #ScrollView
+                    wid: _wid
+                    center_part: _center_part
+                    id: _result_place
+                    size_hint_y: None
+                    spacing: 1
+                    cols: 1
+            #place result place result place result place result
+
+
+
+            #place result place result place result place result
+            BoxLayout:
+                padding: 5
+                size_hint: None, None
+                size: 250, 100
+                ButtonSave:
+                    width: self.parent.width
+                    text: 'THIS DAY HAS ENDED'
+        BoxLayout:
+            id: _wid
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 0
+            canvas:
+                Color:
+                    rgb: .95,.96,.98
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+#LEFT PART LEFT LEFT LEFT LEFT LEFT LEFT#LEFT PART LEFT LEFT LEFT LEFT LEFT LEFT#LEFT PART LEFT LEFT LEFT LEFT LEFT LEFT
+        BoxLayout:
+
+            size_hint_x: None
+            width: 25
+            canvas.before:
+                Color:
+                    rgb: .98,.97,.99
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+#CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER
+        BoxLayout:
+            id: _center_part
+            size_hint_x: None
+            width: 750
+            orientation: 'vertical'
+            canvas.before:
+                Color:
+                    rgb: .98,.97,.99
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            RelativeLayout:
+                size_hint_y: None
+                height: 100
+                canvas:
+                    Color:
+                        rgb: .96,.96,.98
+                    Rectangle:
+                        size:self.width+50, self.height-10
+                        pos: -25,10
+                RelativeLayout:
+                    size_hint_y: None
+                    height: 50
+                    pos: 0,50
+                    TitleLabel:
+                        pos: 25, self.parent.height-self.height
+                        font_size: 32
+                        text: 'Your today summary'
+                        height: 50
+                RelativeLayout:
+                    size_hint_y: None
+                    height: 40
+                    pos: 0,10
+                    canvas:
+                        Color:
+                            rgb: 0,0,1
+                        Rectangle:
+                            size: self.width-50, 5
+                            pos: 25,35
+                    RelativeLayout:
+                        size_hint: None, None
+                        size: 50,35
+                        pos: 25,0
+                        TextTop:
+                            id: _start_day
+                            text: '8:00'
+                    RelativeLayout:
+                        size_hint: None, None
+                        size: 50,35
+                        pos: self.parent.width-self.width-25,0
+                        TextTop:
+                            id: _end_day
+                            text: '23:30'
+            RelativeLayout:
+                size_hint:None,None
+                size: self.parent.width, 64
+                canvas:
+                    Rectangle:
+                        size: self.width, self.height
+                        pos: 0,0
+                        source: 'Settings/images/red.png'
+                Backbtn:
+                    pos: 0,0
+                    size: self.parent.size
+                    on_press:
+                        root.ids._blocks_manager.home_screen()
+                        #root.ids._blocks_manager.current='home_screen'
+                        root.ids._title_category.text = 'HOME'
+                TextTop:
+                    id: _title_category
+                    font_size: 24
+                    text: 'HOME'
+
+
+            BoxLayout:
+                size_hint_y: None
+                height: 16
+            BlockManager:
+                start_day: _start_day
+                result_place: _result_place
+                title_category: _title_category
+                id: _blocks_manager
+            BoxLayout:
+                padding: 5
+                size_hint_y: None
+                height: 100
+
+#CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER
+        BoxLayout:
+            size_hint_x: None
+            width: 25
+            canvas.before:
+                Color:
+                    rgb: .98,.97,.99
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        BoxLayout:
+            size_hint_x: None
+            width: 120
+            canvas:
+                Color:
+                    rgb: 0,1,0
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+
+
+
+#RESULT BLOCKRESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK
+<ResultBlock>:
+    size_hint: None,None
+    size: 300, 80
+    group: '_result-blocks'
+    background_normal: 'Settings/images/free.png'
+    background_down: ''
+    background_color: 1,1,1,1
+
+    BoxLayout:
+        pos: self.parent.pos
+        BoxLayout:
+            size_hint: None, None
+            size: 50, 80
+            orientation: 'vertical'
+            spacing: 1
+            RelativeLayout:
+                size_hint: None, None
+                size: 50,26
+                canvas:
+                    Color:
+                        rgba: (.81,1,.69,1) if self.parent.parent.parent.state=='down' else (.81,1,.69,.25)
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TextTop:
+                    font_size: 10
+                    text: '80'
+            RelativeLayout:
+                size_hint: None, None
+                size: 50,26
+                canvas:
+                    Color:
+                        rgba: (1,.94,.69, 1) if self.parent.parent.parent.state=='down' else (1,.94,.69,.25)
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TextTop:
+                    font_size: 10
+                    text: '10'
+            RelativeLayout:
+                size_hint: None, None
+                size: 50,26
+                canvas:
+                    Color:
+                        rgba: (1,.86,.86,1) if self.parent.parent.parent.state=='down' else (1,.86,.86,.25)
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TextTop:
+                    font_size: 10
+                    text: '10'
+        BoxLayout:
+            size_hint: None, None
+            size: 25, 80
+        RelativeLayout:
+            size_hint: None, None
+            size: 175, 80
+            TextCustom:
+                id: _title_result
+                font_size: 20
+                text: 'Common life task'
+                font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+                height: 40
+                y: 30
+            TextCustom:
+                id: _time_result
+                font_size: 14
+                #text: '2h 30min 8:00-9:00'
+                font_name: 'Settings/fonts/OpenSans-Light.ttf'
+                height: 40
+                y:0
+        RelativeLayout:
+            size_hint: None, None
+            size: 50,80
+            canvas:
+                Color:
+                    rgb: (.19, .24, .29, 1) if self.parent.parent.state=='down' else (1,1,1,1)
+                Rectangle:
+                    pos: 0,20 #(self.parent.height-self.height)/2
+                    size: 20,40
+                    source: 'Settings/images/dots.png'
+
+#RESULT BLOCKRESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK RESULT BLOCK
+
+
+
+
+<Category>:
+    size_hint: .5,None
+    height: 126
+    canvas:
+        Rectangle:
+            size:self.size
+            pos: 0,0
+            source: 'Settings/images/gray_square.png'
+    RelativeLayout: #IMAGE IMAGE IMAGE IMAGE IMAGE IMAGE
+        id: _icon
+        size_hint: None, None
+        size: 60, 70
+        pos: (self.parent.width-self.width)/2, self.parent.height-self.height
+        #canvas:
+        #    Rectangle:
+        #        pos: 0,0
+        #        size: 80,80
+        #        source: 'Settings/images/users/user.png'
+    TextTop:
+        id: _title
+        color: 0,0,0,1
+        text: 'Title'
+        font_size: 24
+        height: 66
+        pos: 0, 0
+
+<Subsection>:
+    size_hint: .5, None
+    height: 126
+    group: '_subsections'
+    background_normal: 'Settings/images/green_button.png'
+    background_down: ''
+    background_color: .19, .24, .29, 1
+    markup: True
+
+    RelativeLayout:
+        size: self.parent.size
+        pos: self.parent.pos
+        RelativeLayout: #IMAGE IMAGE IMAGE IMAGE IMAGE IMAGE
+            id: _icon
+            size_hint: None, None
+            size: 60,70
+            pos: (self.parent.width-self.width)/2, self.parent.height-self.height
+            #canvas:
+            #    Rectangle:
+            #        pos: 0,0
+            #        size: 80,80
+            #        source: 'Settings/images/users/user.png'
+        TextTop:
+            id: _subsection_title
+            color: 0,0,0,1
+            text: 'Title'
+            font_size: 24
+            height: 66
+            pos: 0, 0
+    #Changetime:
+    #    size_hint: None, None
+    #    size: self.parent.size
+    #    pos: self.parent.pos
+
+<HomeScreen>:
+    #name: 'home_screen'
+    GridLayout: #ScrollView
+        id: _categories_place
+        spacing: 16
+        padding: 0
+        cols: 2
+        rows: 3
+
+<RedScreen>:
+    canvas:
+        Color:
+            rgb: 1,0,0
+        Rectangle:
+            size:self.size
+            pos:self.pos

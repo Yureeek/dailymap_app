@@ -1,0 +1,186 @@
+#: import goals_creation Target_window.goals_creation
+<GoalsCreation>:
+    goals_place: _goals_place
+    name: 'goals_creation_tab'
+    BoxLayout:
+        BoxLayout: #LEFT PART
+            size_hint_x: None
+            width: 800
+            orientation: 'vertical'
+            RelativeLayout:
+                size_hint_y: None
+                height: 50
+                canvas:
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TitleLabel:
+                    pos: 50, self.parent.height-self.height
+                    font_size: 32
+                    text: 'Create your long-term goals'
+                    height: 50
+            ScrollView:
+                size: self.size
+                scroll_timeout: 250
+                scroll_distance: 20
+                do_scroll_y: True
+                do_scroll_x: False
+
+                GridLayout: #BLOCKS BLOCKS BLOCKS GOALS
+                    title_info: _title_info
+                    comments_info: _comments_info
+                    image_info: _image_info
+                    pos_info: _pos_info
+                    size_hint_y: None
+                    id: _goals_place
+                    padding: 25
+                    spacing: 10
+                    cols: 2
+
+#BLOCKS BLOCKS BLOCKS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS
+
+
+
+    #BLOCKS BLOCKS BLOCKS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS GOALS
+            #Widget:
+        BoxLayout: #RIGHT PART SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS
+
+            size_hint_x: None
+            width: 800
+            orientation: 'vertical'
+            RelativeLayout:
+                size_hint_y: None
+                height: 50
+                canvas:
+                    Color:
+                        rgb: .25, .46, .97
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TitleLabel:
+                    pos: 25, self.parent.height-self.height
+                    font_size: 32
+                    color: 1,1,1,1
+                    text: 'Details'
+                    height: 50
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 25
+                spacing: 5
+                canvas:
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                RelativeLayout: #IMAGE IMAGE IMAGE IMAGE IMAGE IMAGE
+                    id: _image_info
+                    size_hint: None, None
+                    size: 75,75
+                    canvas:
+                        Rectangle:
+                            pos: 0,5
+                            size: 70,70
+                            source: 'Settings/images/navigation/goals_creation_black.png'
+                    Button:
+                        id: _setting_image_btn
+                        size_hint: None, None
+                        pos: 75, 50
+                        size: 25,25
+                        background_normal: ''
+                        background_down: ''
+                        on_press: print('Hello')
+                        RelativeLayout:
+                            pos: self.parent.pos
+                            size: self.parent.size
+                            canvas:
+                                Rectangle:
+                                    pos: 0,0
+                                    size: 25,25
+                                    source: 'Settings/images/goals/setting.png'
+
+
+                TextCustom:
+                    text: 'Title'
+                    height: 30
+                TextInputCustom:
+                    id: _title_info
+                    size: 300, 50
+                TextCustom:
+                    text: 'Comments'
+                    height: 30
+                TextInputCustom:
+                    id: _comments_info
+                    multiline: True
+                    size: 300, 150
+                TextCustom:
+                    text: 'Position'
+                    height: 30
+                TextInputCustom:
+                    id: _pos_info
+                    size: 50, 50
+                Widget:
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    spacing: 5
+                    ButtonDelete:
+                        width: 130
+                        text: 'Delete'
+                        on_press: root.delete_goal()
+                    ButtonSave:
+                        width: 165
+                        text: 'Save'
+                        on_press: root.change_goal()
+                Widget:
+                ButtonSave:
+                    height: 80
+                    width: 300
+                    text: 'ADD NEW GOAL'
+                    on_press: root.add_goal()
+
+
+
+
+
+<GoalContainer>:
+    size_hint: None, None
+    size: 345, 140
+    group: '_goal_container'
+    background_normal: 'Settings/images/123.png'
+    background_down: 'Settings/images/green_button.png'
+
+    RelativeLayout:
+        size: self.parent.size
+        pos: self.parent.pos
+        RelativeLayout: #IMAGE IMAGE IMAGE IMAGE IMAGE IMAGE
+            id: _icon
+            size_hint: None, None
+            size: 50,50
+            pos: 0, self.parent.height-self.height
+            ##canvas:
+            #   Ellipse:
+            #        pos: 5,0
+            #        size: 45,45
+            #        source: 'Settings/images/users/user.png'
+        TextCustom:
+            id: _title
+            pos: 75, self.parent.height-self.height
+            font_size: 32
+            color: 0,0,0,1
+            text: ''
+            height: 50
+
+        TextCustom:
+            id: _comments
+            pos: 5, self.parent.height-self.height-55
+            font_size: 14
+            color: 0,0,0,1
+            text: ""
+            valign: 'top'
+            size_hint: None, None
+            size: 335, 85
+
+

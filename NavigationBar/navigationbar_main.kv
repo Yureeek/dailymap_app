@@ -1,0 +1,163 @@
+#: import navigationbar_main NavigationBar.navigationbar
+#:import C kivy.utils.get_color_from_hex
+<NavigationBar>:
+    target_btn: _target_btn
+    schedule_btn: _schedule_btn
+    dashboard_btn: _dashboard_btn
+    settings_btn: _settings_btn
+    size_hint: None, None
+    pos: 0, self.parent.height-self.height
+    height: 50
+    width: 1200
+    canvas.before:
+        PushMatrix:
+        Color:
+            rgb: .87, .89, .91
+        Line:
+            points: self.x,self.y, self.x+self.width, self.y
+            width: 1.25
+        PopMatrix:
+    canvas:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    BoxLayout:                          #LOGO---------------
+        size_hint: None,1
+        width: 200
+        Logolbl:
+            text: 'Dailymap'
+    BoxLayout: #MENU---------------MENU---MENU---MENU---MENU---MENU---MENU---MENU---MENU--MENU--MENU---MENU
+        NavigationButton:
+            id: _target_btn
+            state: 'down'
+            #on_press: app.root_application_manager.current='target_window'
+            width:115 #a little bit thinner
+            on_press: app.root_application_manager.current='target_window'
+            SL:
+                RL:
+                    canvas:
+                        Rectangle:
+                            pos: 0,14 #a little bit higher (small image)
+                            size: 25,25
+                            source: 'Settings/images/navigation/target.png'
+                Btnlbl:
+                    width: 85 #a little bit thinner
+                    text: 'Target'
+        NavigationButton:
+            id: _schedule_btn
+            on_press: app.root_application_manager.current='schedule_window'
+            SL:
+                RL:
+                    canvas:
+                        Rectangle:
+                            pos: 0,12
+                            size: 25,25
+                            source: 'Settings/images/navigation/schedule.png'
+                Btnlbl:
+                    text: 'Schedule'
+        NavigationButton:
+            id: _dashboard_btn
+            #on_press: app.root_application_manager.current='dashboard_window'
+            SL:
+                RL:
+                    canvas:
+                        Rectangle:
+                            pos: 0,12
+                            size: 25,25
+                            source: 'Settings/images/navigation/dashboard.png'
+                Btnlbl:
+                    text: 'Dashboard'
+#-------------------------------------------MENU---------------MENU---MENU---MENU---MENU---MENU---MENU---MENU---MENU--MENU--MENU---MENU
+
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 10
+
+        Widget:
+
+        RelativeLayout:
+            size_hint_x:None
+            width: 50
+            canvas:
+                Ellipse:
+                    pos: 5,5
+                    size: 40,40
+                    source: 'Settings/images/users/user.png'
+        Userlbl:
+            id: _username
+
+        NavigationButton:
+            id: _settings_btn
+            size_hint_x: None
+            width: 50
+            background_normal: ''
+            background_down: ''
+            on_press:
+                root.display_user_data_settings()
+                app.root_application_manager.current='settings_window'
+            RelativeLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                canvas:
+                    Color:
+                        rgba: (.19, .24, .29, 1) if self.parent.state == 'down' else (.52, .59, .71, 1)
+                    Rectangle:
+                        pos: 0,12
+                        size: 26,28
+                        source: 'Settings/images/navigation/settings1.png'
+
+
+
+
+<NavigationButton@ToggleButton>:
+    group: '_mbtn'
+    size_hint: None, 1
+    width: 140
+    background_normal: ''
+    background_down: ''
+
+<Btnlbl@Label>:
+    size_hint_x: None
+    color: .19, .24, .29, 1 if self.parent.parent.state == 'down' else .52, .59, .71, 1
+    font_size: 16
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+
+<Logolbl@Label>:
+    color: .01, .70, .89,1
+    font_size: 30
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    halign: 'center'
+    valign: 'top'
+
+
+
+<Userlbl@Label>:
+    size_hint_x: None
+    color: .52, .59, .71, 1
+    font_size: 16
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+
+
+
+<SL@StackLayout>:
+    pos: self.parent.pos
+    size: self.parent.size
+    orientation: 'lr-tb'
+
+<RL@RelativeLayout>:
+    size_hint_x: None
+    width: 30
+    pos: self.parent.pos
+    canvas:
+        Color:
+            rgba: (.19, .24, .29, 1) if self.parent.parent.state == 'down' else (.52, .59, .71, 1)
+

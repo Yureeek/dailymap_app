@@ -1,0 +1,59 @@
+#: import entry_tab Registration_window.registration
+#:import C kivy.utils.get_color_from_hex
+<EntryScreen>
+    name: 'entry_tab'
+    win_screen: app.root_registration_manager
+    username: _username
+    password: _password
+    error_lbl: _error_lbl
+
+    BoxLayout:
+        pos: (self.parent.width-self.width)/2, 40
+        orientation: 'vertical'
+        size_hint: None, None
+        size: 500, 400
+        TitleLabel:
+            font_size: 40
+            text: 'Sign in to your account'
+        TitleLabel:
+            font_size: 16
+            text: 'Your account is your portal to all things Daily Map: your reports, statistics, achievements, habits, and more!'
+
+        TextCustom:
+            text: 'Username'
+        TextInputCustom:
+            text: 'Yuri'
+            id: _username
+
+        TextCustom:
+            text: 'Password'
+        TextInputCustom:
+            text: '1234567'
+            password: True
+            id: _password
+        TitleLabel:
+            id: _error_lbl
+            font_size: 16
+            text: ''
+        ButtonRegistration:
+            text: 'SIGN IN'
+            width: 500
+            on_press: root.enter_user()
+
+
+
+
+
+
+
+
+<ButtonRegistration@Button>:
+    size_hint: None, None
+    height: 50
+    font_name: 'Settings/fonts/OpenSans-Bold.ttf'
+    background_normal: ''
+    #background_down: ''
+    bold: True
+    background_color: .01, .70, .89,1
+
+

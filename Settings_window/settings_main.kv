@@ -1,0 +1,99 @@
+#: import settings_main Settings_window.settings_py
+
+<SettingsWindow@Screen>:
+
+    name: 'settings_window'
+    canvas:
+        Color:
+            rgb: .96,.96,.98
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    BoxLayout:
+        size_hint: None, None
+        size: 900, 500
+        center_x: self.parent.center_x
+        y: self.parent.height - (self.height+100)
+
+        spacing: 10
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 240
+            RelativeLayout: #JUST LABEL )))))
+                size_hint_y: None
+                height: 50
+                Ulbl:
+                    pos: 30,0
+                    text: 'ACCOUNT'
+
+            MenuButton:
+                state: 'down'
+                on_press:  _tabs.current = 'personal_info'
+                Mlbl:
+                    pos: self.parent.x + 30, self.parent.y
+                    text: 'Personal Information'
+
+            MenuButton:
+                on_press:  _tabs.current = 'password_settings'
+                Mlbl:
+                    pos: self.parent.x + 30, self.parent.y
+                    text: 'Password'
+            Widget:
+            ExitBtn:
+                id: exit_btn
+                size_hint: None,None
+                size: 240,50
+                background_normal: ''
+                background_down: ''
+                background_color: .96,.96,.98, 1
+                RelativeLayout:
+                    pos: self.parent.pos
+                    size: 60, 50
+                    canvas:
+                        Color:
+                            rgba: (0,0,0,1) if self.parent.state == 'down' else (.19, .24, .29, 1)
+                        Rectangle:
+                            pos: 30,0
+                            size: self.size
+                            source: 'Settings/images/exit.png'
+        ScreenManager:
+            id: _tabs
+            transition: NoTransition()
+            PersonalInformation
+                id: _personal_window
+            PasswordSettings
+
+
+
+
+
+
+<MenuButton@ToggleButton>:
+    group: '_menubutton'
+    size_hint_y: None
+    height: 50
+    background_normal: ''
+    background_color: .96,.96,.98, 1
+    background_down: 'Settings/images/green_button.png'
+<Mlbl@Label>:
+    size_hint: None, None
+    height: 50
+    width: 200
+    color:(1,1,1,1) if self.parent.state == 'down' else (.19, .24, .29,1)
+    font_size: 16
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+
+<Ulbl@Label>:
+    size_hint: None, None
+    height: 50
+    width: 200
+    color: .19, .24, .29, 1
+    font_size: 16
+    font_name: 'Settings/fonts/OpenSans-Semibold.ttf'
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'

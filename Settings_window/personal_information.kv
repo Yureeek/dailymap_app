@@ -1,0 +1,81 @@
+#: import settings_main Settings_window.settings_py
+
+
+
+#--------------------------------------------PERSONAL INFORMATION
+<PersonalInformation>:
+    name: 'personal_info'
+    username: _username
+    password: _password
+    email: _email
+    error_lbl: _error_lbl
+    RelativeLayoutCustom:
+        pos: 0, self.parent.height-self.height
+        size_hint: None, None
+        size: 650, 500
+        BoxLayout:
+            pos: (self.parent.width-self.width)/2,25
+            orientation: 'vertical'
+            size_hint: None, None
+            size: 550, 500
+            TitleLabel:
+                font_size: 40
+                text: 'Personal Information'
+            TitleLabel:
+                font_size: 16
+                text: 'Here you can change your personal data. You can specify an email to not lose your account in case you forget your password.'
+
+            TextCustom:
+                text: 'Email'
+            TextInputCustom:
+                width: 550
+                id: _email
+
+            TextCustom:
+                text: 'Username'
+            TextInputCustom:
+                width: 550
+                id: _username
+
+            TextCustom:
+                text: 'Password'
+            TextInputCustom:
+                width: 550
+                password: True
+                id: _password
+            TitleLabel:
+                id: _error_lbl
+                font_size: 16
+            BoxLayout:
+                size_hint_y: None
+                height: 50
+                spacing: 5
+                Widget:
+                ButtonCancel:
+                    id: _cancel_btn
+                    text: 'CANCEL'
+                    on_press:
+                        root.display_user_data_settings()
+                        root.error_lbl.text = ''
+                ButtonSave:
+                    id: _save_btn
+                    text: 'SAVE'
+                    on_press: root.update_user_data()
+    Widget:
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+                #Button:
+                #    size_hint: None, None
+                #    size: 80,80
+                ##    background_normal: ''
+                 #   background_down: ''
+                 #   on_press: print('good')
+                 #   RelativeLayout:
+                 #       pos: self.parent.pos
+                 #       size: self.parent.size
+                 #       canvas:
+                 #           Color:
+                 #               rgba: (.19, .24, .29, 1) if self.parent.state == 'down' else (.52, .59, .71, 1)
+                 #           Rectangle:
+                 #               pos: 2.5,2.5
+                 #               size: 75,75
+                 #               source: 'Settings/images/users/user.png'

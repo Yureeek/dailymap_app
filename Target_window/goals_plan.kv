@@ -1,0 +1,433 @@
+#: import goals_plan Target_window.goals_plan
+#:import Factory kivy.factory.Factory
+#:import Window kivy.core.window
+<GoalsPlan>:
+    name: 'goals_plan_tab'
+
+    BoxLayout:
+        pos: 25,0
+        size_hint_x: None
+        orientation: 'vertical'
+        width: 1100
+        BoxLayout:  #top_______________
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 50
+            spacing: 5
+            canvas:
+                Color:
+                    rgb: 1,1,1
+                Rectangle:
+                    size: self.width+50, self.height
+                    pos: self.x-25, self.y
+            RelativeLayout:
+                size_hint_x: None
+                width: 450
+                TitleLabel:
+                    pos: 25, self.parent.height-self.height
+                    font_size: 32
+                    text: 'Setting up your weekly plan'
+                    height: 50
+            Widget:
+
+            RelativeLayout:     #DATE DATE DATE DATE DATE DATE
+                size_hint: None, None
+                width: 280#565#322.5
+                height: 40
+                canvas:
+                    Color:
+                        rgb: .98,.99,.99
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TextTop:
+                    size_hint_x:None
+                    width:200
+                    x: 40
+                    id: _today_date
+                    text: 'SUNDAY, 10 JUNE 2018'
+
+            RelativeLayout:     #DATE DATE DATE DATE DATE DATE
+                size_hint: None, None
+                width: 280#565#322.5
+                height: 40
+                canvas:
+                    Color:
+                        rgb: .98,.99,.99
+                    Rectangle:
+                        size: self.size
+                        pos: 0,0
+                TextTop:
+                    size_hint_x:None
+                    width:250
+                    x: 5
+                    id: _start_week_date
+                    text: '4-10 JUNE 2018'
+                Datebtn:
+
+                    id: _date_btn_one
+                    on_release: Factory.DatePopup(root.ids._today_date).open()
+
+#______________________________________________
+        BoxLayout: #Titles
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 40
+            canvas:
+                Color:
+                    rgb: .96,.96,.98
+                Rectangle:
+                    size: self.width+50, self.height
+                    pos: self.x-25, self.y
+            canvas.after:
+                Color:
+                    rgb: .87, .89, .91
+                Line:
+                    points:  self.pos[0], self.pos[1]+0.5, self.pos[0] + self.size[0], self.pos[1]+0.5
+                    width: 0.5
+            BlockCustomTop:
+                width: 280
+                TextTop:
+                    text: 'GOAL TITLES'
+            BlockCustomTop:
+                width: 150
+                TextTop:
+                    text: 'TOTAL HOURS'
+            Widget:
+                size_hint: None, None
+                size: 30,50
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id: _one_day
+                    text: 'MON'
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id:_two_day
+                    text: 'TUE'
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id:_three_day
+                    text: 'WED'
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id:_four_day
+                    text: 'THU'
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id:_five_day
+                    text: 'FRI'
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id:_six_day
+                    text: 'SAT'
+            BlockCustomTop:
+                width: 85
+                TextTop:
+                    id:_seven_day
+                    text: 'SUN'
+
+#_________________________________________
+        ScrollView:
+            size_hint: None,None
+            size: 1100, 465
+            #size: self.size
+            scroll_timeout: 250
+            scroll_distance: 20
+            do_scroll_y: True
+            do_scroll_x: False
+
+            #BoxLayout:
+            #    id: _goals_plan_place
+            #    size_hint_y:None
+            #    orientation: 'vertical'
+            GridLayout: #ScrollView
+                id: _goals_plan_place
+                size_hint_y: None
+                cols: 1
+            #_____________________
+            #Blocks are here
+
+
+
+            #Blocks are here
+            #____________________
+#________________________________
+
+#_________________________
+
+        SummaryPlace:
+            id: _summary_place
+#__________________________________
+        BoxLayout:  #Save bar
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 80
+            spacing: 25
+            canvas:
+                Color:
+                    rgb: .97,.99,.98
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            RelativeLayout:
+                size_hint_x:None
+                width: 1100
+                BoxLayout:
+                    spacing: 5
+                    y: 15
+                    ButtonDelete:
+                        on_press: root.clean_all()
+                        text: 'Clean all'
+                    ButtonCancel:
+                        on_press: root.repeat_last_week()
+                        text: 'Repeat last week'
+                    Widget:
+                    ButtonCancel:
+                        on_press: root.cancel_goals_plan()
+                        text: 'Cancel'
+                    ButtonSave:
+                        on_press: root.save_goals_plan()
+                        text: 'Save'
+
+#________________________________
+        Widget: #25px
+            size_hint_y: None
+            height: 25
+#________________________________
+
+
+
+########################################################################################################################
+
+
+<GoalPlanContainer>:
+    size_hint: None, None
+    size: 1100, 60
+    group: '_goal_plan_container'
+    background_normal: 'Settings/images/123.png'
+    background_down: 'Settings/images/green_button.png'
+    BoxLayout:
+        hours_week: _hours_week
+        size_hint: None, 1
+        width: 1100
+        pos: self.parent.pos
+        Widget:
+            size_hint: None, 1
+            width: 20
+        RelativeLayout: #IMAGE IMAGE IMAGE IMAGE IMAGE IMAGE
+            id: _icon
+            size_hint: None, 1
+            width: 80
+            #canvas:
+            #    Rectangle:
+            #        pos: 15,15
+            #        size: 50,50
+            #        source: 'Settings/images/navigation/goals_creation_black.png'
+        RelativeLayout: #TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+            size_hint: None,1
+            width: 180
+            TitleLabel:
+                id: _title
+                pos: 5,5
+                font_size: 18
+                color: 0,0,0,1
+                height: 50
+        BlockCustomHour:
+            id: _hours_week
+            width: 150
+
+        Widget:
+            size_hint: None, 1
+            width: 30
+        BlockCustom:
+            id: _one#_monday
+            width: 85
+        BlockCustom:
+            id: _two#_tuesday
+            width: 85
+        BlockCustom:
+            id: _three#_wednesday
+            width: 85
+        BlockCustom:
+            id: _four#_thursday
+            width: 85
+        BlockCustom:
+            id: _five#_friday
+            width: 85
+        BlockCustom:
+            id: _six#_saturday
+            width: 85
+        BlockCustom:
+            id: _seven#_sunday
+            width: 85
+        Widget:
+            size_hint: None, 1
+            width: 20
+
+
+<BlockCustomHour>:
+    size_hint: None, None
+    height: 60
+    group: '_goal_plan_hours'
+    background_normal: 'Settings/images/free.png'
+    background_down: ''
+    background_color: .19, .24, .29, 1
+    font_name: 'Settings/fonts/OpenSans-Bold.ttf' if self.parent.parent.state=='down' else 'Settings/fonts/OpenSans-Light.ttf'
+    color: (1,1,1,1) if self.parent.parent.state=='down' else (.19,.24,.29,1)
+    markup: True
+
+
+
+
+<BlockCustom@BlockCustomHour>:
+    RelativeLayout:
+        size_hint: None, None
+        pos: self.parent.pos
+        size: self.parent.size
+        canvas.after:
+            Color:
+                rgb: .87, .89, .91 #.52, .59, .71, 1
+            Line:
+                points:  self.pos[0] + self.size[0], self.pos[1] + self.size[1]*10/10, self.pos[0] + self.size[0], self.pos[1]+self.size[1]*0/10
+                #width: 1
+            Line:
+                points:  self.pos[0], self.pos[1] + self.size[1]*10/10, self.pos[0], self.pos[1]+self.size[1]*0/10
+                #width: 1
+    Changetime:
+        size_hint: None, None
+        size: self.parent.size
+        pos: self.parent.pos
+
+<Changetime@StackLayout>:
+    orientation: 'lr-tb'
+    Timebtnph:
+        id: _plus_hour
+        size_hint: .5,.5
+        text: ''
+    Timebtnpm:
+        text: ''
+        id: _plus_min
+        size_hint: .5,.5
+    Timebtnmh:
+        text: ''
+        id: _minus_hour
+        size_hint: .5,.5
+    Timebtnmm:
+        text: ''
+        id: _minus_min
+        size_hint: .5,.5
+
+
+
+
+<BlockCustomTop@RelativeLayout>:
+    size_hint: None, None
+    height: 40
+
+
+
+<TextBottom@Label>:
+    font_name: 'Settings/fonts/OpenSans-Light.ttf'
+    text_size: self.size
+    pos: 0, (self.parent.height-self.height)/2
+    font_size: 14
+    color: .19, .24, .29, 1
+    halign: 'center'
+    valign: 'middle'
+    size_hint_y: None
+
+
+<DatePopup>:
+    size_hint:None,None
+    pos_hint: {'x': 610/Window.Window.width,'y': 570/Window.Window.height}
+    size: 565,80 #pos=(610, 530),
+    title: ""
+    separator_height: 0
+    auto_dismiss: True
+    background_color: 0,0,0,0
+
+    BoxLayout:
+        TextBottom:
+            id: _week
+            size_hint_x:None
+            height:50
+            width:80
+            text: 'WEEK 23'
+            color: 1,1,1,1
+        Leftbtn:
+            id:_left
+        TextBottom:
+            id:_date
+            height:50
+            color: 1,1,1,1
+            text: '---'
+        Rightbtn:
+            id:_right
+        ButtonSave:
+            id: _save_btn
+            text: 'Save'
+
+<SummaryPlace@BoxLayout>: #Summary #Summary #Summary #Summary #Summary #Summary
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 40
+    canvas:
+        Color:
+            rgb: .96,.96,.98
+        Rectangle:
+            size: self.width+50, self.height
+            pos: self.x-25, self.y
+    BlockCustomTop:
+        width: 280
+        TextTop:
+            text: 'SUMMARY'
+    BlockCustomTop:
+        width: 150
+        TextTop:
+            id: _sum_hours_week
+            text: '10/112'
+    Widget:
+        size_hint: None, None
+        size: 30,50
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_one
+            text: '3/16'
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_two
+            text: '3/16'
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_three
+            text: '3/16'
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_four
+            text: '3/16'
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_five
+            text: '3/16'
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_six
+            text: '3/16'
+    BlockCustomTop:
+        width: 85
+        TextTop:
+            id: _sum_seven
+            text: '3/16'
